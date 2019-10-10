@@ -3,13 +3,14 @@
 
 int main() 
 {	
-	sf::RenderWindow window(sf::VideoMode(1024, 512), "Ponkerman!");
+	sf::RenderWindow window(sf::VideoMode(1280, 720), "Ponkerman!", sf::Style::Titlebar | sf::Style::Close);
+	window.setFramerateLimit(60);
 
-	sf::RectangleShape attack(sf::Vector2f(128.0f, 64.0f));
+	sf::RectangleShape attack(sf::Vector2f(128, 64));
 	attack.setFillColor(sf::Color::Red);
-	attack.setPosition(0.0f, 448.0f);
+	attack.setPosition(0.0f, window.getSize().y - attack.getSize().y);
 
-	sf::RectangleShape heal(sf::Vector2f(128.0f, 64.0f));
+	sf::RectangleShape heal(sf::Vector2f(128, 64));
 	heal.setFillColor(sf::Color::Blue);
 	heal.setPosition(attack.getPosition().x + attack.getSize().x, attack.getPosition().y);
 

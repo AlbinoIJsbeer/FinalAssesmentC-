@@ -1,2 +1,3 @@
-﻿  main.cpp
+﻿  Button.cpp
+C:\Users\Tom\Documents\Saxion\Quarter 2.1\C++\FinalAssesmentC-\Final Assesment\Button.cpp(56): warning C4715: 'Button::checkClick': not all control paths return a value
   Final Assesment.vcxproj -> C:\Users\Tom\Documents\Saxion\Quarter 2.1\C++\FinalAssesmentC-\Debug\Final Assesment.exe

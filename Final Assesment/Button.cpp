@@ -2,15 +2,18 @@
 
 Button::Button()
 {
-	mousePressed = false;
 }
 
 Button::Button(sf::Vector2f size, sf::Vector2f position, sf::Color color)
 {
+
 	bSize = size;
 	bPosition = position;
 	bColor = color;
-	sf::RectangleShape bRectangle;
+	bRectangle.setSize(bSize);
+	bRectangle.setPosition(bPosition);
+	bRectangle.setFillColor(bColor);
+	
 }
 
 Button::~Button()
@@ -18,13 +21,6 @@ Button::~Button()
 
 }
 
-void Button::CreateButton()
-{
-	bRectangle.setSize(bSize);
-	bRectangle.setPosition(bPosition);
-	bRectangle.setFillColor(bColor);
-	
-}
 
 void Button::DrawButton(sf::RenderWindow& window)
 {
@@ -32,27 +28,30 @@ void Button::DrawButton(sf::RenderWindow& window)
 }
 
 
-bool Button::checkClick(sf::RenderWindow & window)
+bool Button::checkClick(sf::RenderWindow& window)
 {
 	mousePos = sf::Mouse::getPosition(window);
-	mousePressed = false;
-	if(sf::Mouse::isButtonPressed(sf::Mouse::Left))
-	{
-		if(mousePressed)
+		if(sf::Mouse::isButtonPressed(sf::Mouse::Left))
 		{
-			return false;
-		} else if(!mousePressed)
-		{
-			if(mousePos.x > getPosition().x && mousePos.x < getPosition().x + getSize().x
-			   && mousePos.y > getPosition().y && mousePos.y < getPosition().y + getSize().y)
+			if(mousePos.x > getPos().x && mousePos.y > getPos().y
+			   && mousePos.x < getPos().x + getSize().x && mousePos.y < getPos().y + getSize().y)
 			{
+		    ///////////////////////////////////////////Debug Info////////////////////////////////////////
+			///	/*std::cout << "Coords: " << getPosition().x << ", " << getPosition().y << std::endl;///
+			///	std::cout << "Size: " << getSize().x << ", " << getSize().y << std::endl;			 ///
+			///	std::cout << "Mouse Coords: " << mousePos.x << ", " << mousePos.y << std::endl;*/	 ///
+			////////////////////////////////////////////////////////////////////////////////////////////
 				return true;
 			} else
 			{
 				return false;
 			}
+
+		} else
+		{
+			return false;
 		}
-	}
+		
 }
 
 sf::RectangleShape Button::getShape() const

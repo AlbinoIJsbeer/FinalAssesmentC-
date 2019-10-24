@@ -36,13 +36,9 @@ public:
 	void setColor(sf::Color);
 		//setColor - sets color of the button
 
-	void CreateButton();
 	void DrawButton(sf::RenderWindow&);
 	bool checkClick(sf::RenderWindow&);
 
-
-
-	bool mousePressed;
 private:
 	sf::Vector2f bSize;
 	sf::Vector2f bPosition;

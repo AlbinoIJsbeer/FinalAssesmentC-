@@ -8,80 +8,55 @@ int main()
 	window.setFramerateLimit(60);
 
 	
-	Button AttackButton(sf::Vector2f(128, 64), sf::Vector2f(0, 0), sf::Color::Green);
-	
+	Button AttackButton(sf::Vector2f(128, 64), sf::Vector2f(0, window.getSize().y - 64), sf::Color::Red);
+	Button HealButton(sf::Vector2f(128, 64), sf::Vector2f(AttackButton.getPosition().x + 128, window.getSize().y - 64), sf::Color::Blue);
 
-	sf::RectangleShape attack(sf::Vector2f(128, 64));
-	attack.setFillColor(sf::Color::Red);
-	attack.setPosition(0.0f, window.getSize().y - attack.getSize().y);
-
-	sf::RectangleShape heal(sf::Vector2f(128, 64));
-	heal.setFillColor(sf::Color::Blue);
-	heal.setPosition(attack.getPosition().x + attack.getSize().x, attack.getPosition().y);
 
 	sf::Vector2i mousePos;
 	bool Mousepressed = false;
-	AttackButton.CreateButton();
 	while(window.isOpen())
 	{
 		sf::Event event;
 		while(window.pollEvent(event))
 		{
-			if(event.type == sf::Event::Closed)
-				window.close();
-		}
-		if(AttackButton.checkClick(window))
-		{
-			AttackButton.mousePressed = false;
-		}
-
-		if(sf::Mouse::isButtonPressed(sf::Mouse::Button::Left))
-		{
-			
-			mousePos = sf::Mouse::getPosition(window);
-			if(Mousepressed)
+				
+			switch(event.type)
 			{
-				continue;
-			}
-			else if(!Mousepressed)
-			{ 
-				/*if(mousePos.x > attack.getPosition().x && mousePos.x < attack.getPosition().x + attack.getSize().x
-				   && mousePos.y > attack.getPosition().y && mousePos.y < attack.getPosition().y + attack.getSize().y)
-				{
-					if(rand() % 100 < 90)
+				case sf::Event::Closed:
+					window.close();
+					break;
+				case sf::Event::MouseButtonPressed:
+					if(AttackButton.checkClick(window))
 					{
-						std::cout << "You attacked!\n";
-					} else
+						if(rand() % 100 < 85)
+						{
+							std::cout << "Attacked!\n";
+						} else
+						{
+							std::cout << "Missed the attack!\n";
+						}
+						
+					} else if(HealButton.checkClick(window))
 					{
-						std::cout << "You missed your attack!\n";
+						if(rand() % 100 < 40)
+						{
+							std::cout << "Healed!\n";
+						} else
+						{
+							std::cout << "Failed to heal!\n";
+						}
 					}
-					
-				} else*/ if(mousePos.x > heal.getPosition().x && mousePos.x < heal.getPosition().x + heal.getSize().x
-						  && mousePos.y > heal.getPosition().y && mousePos.y < heal.getPosition().y + heal.getSize().y)
-				{
-					if(rand() % 100 < 40)
-					{
-						std::cout << "You healed!\n";
-					} else
-					{
-						std::cout << "You failed to heal yourself!\n";
-					}
-					
-				}
-				Mousepressed = true;
+					break;
 			}
-			continue;
+			
 		}
-		if(sf::Keyboard::isKeyPressed(sf::Keyboard::A))
-		{
-			std::cout << "Pressed A!\n";
-		}
+		
+		
 
-		Mousepressed = false;
+		
 		window.clear();
 		AttackButton.DrawButton(window);
-		window.draw(attack);
-		window.draw(heal);
+		HealButton.DrawButton(window);
 		window.display();
 	}
 

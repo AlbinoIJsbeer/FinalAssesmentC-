@@ -3,6 +3,7 @@
 #include <SFML/Graphics.hpp>
 
 #include "Button.h"
+#include "Menu.h"
 
 int main() 
 {
@@ -10,6 +11,9 @@ int main()
 	bool isPaused = false;
 	window.setFramerateLimit(60);
 	window.requestFocus();
+	
+
+	Menu menu(window.getSize().x, window.getSize().y);
 
 	sf::Texture sTextures[2];
 	sf::Sprite sSprites[2];
@@ -41,6 +45,7 @@ int main()
 
 	while(window.isOpen())
 	{
+
 		sf::Event event;
 		while(window.pollEvent(event))
 		{
@@ -108,16 +113,16 @@ int main()
 		{
 			window.clear();
 
-			AttackButton.DrawButton(window);
-			HealButton.DrawButton(window);
-			if(issTexture1)
-			{
-				window.draw(sSprites[0]);
-			} else if(!issTexture1)
-			{
-				window.draw(sSprites[1]);
-			}
-
+			//AttackButton.DrawButton(window);
+			//HealButton.DrawButton(window);
+			//if(issTexture1)
+			//{
+			//	window.draw(sSprites[0]);
+			//} else if(!issTexture1)
+			//{
+			//	window.draw(sSprites[1]);
+			//}
+			menu.draw(window);
 			window.display();
 		}
 
